@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>User Registration Form</title>
+<style>
+table, th, td {
+	border: 2px solid black;
+}
+
+th, td {
+	padding: 5px;
+}
+
+table {
+	align: center;
+	width: 75%;
+	border-spacing: 2px;
+	background-color: #f1f1c1;
+}
+
+table tr:nth-child(even) {
+	background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+table th {
+	text-align: center;
+	color: black;
+	background-color: #fff;
+}
+
+p {
+	text-align: center;
+}
+
+#errorBox {
+	color: #F00;
+}
+</style>
+</head>
+<body>
+	<div align="center">
+		<form name="myform" action="RegServlet" method="post">
+			<br> <br>
+			<div id="errorBox"></div>
+			<h3>User Registration Form</h3>
+			<table>
+				<tr>
+					<td>FirstName*:</td>
+					<td align="center"><input type="text" name="fname" value="" id="fname"
+						placeholder="First Name" /></td>
+				</tr>
+				<tr>
+					<td>LastName*:</td>
+					<td align="center"><input type="text" name="lname" value="" id="lname"
+						placeholder="Last Name" /></td>
+				</tr>
+				<tr>
+					<td>UserName*:</td>
+					<td align="center"><input type="text" name="uname" value="" id="uname"
+						placeholder="User Name" /></td>
+				</tr>
+				<tr>
+					<td>Password*:</td>
+					<td align="center"><input type="password" name="psswd" value="" id="psswd"
+						placeholder="Password" /></td>
+				</tr>
+				<tr>
+					<td>Confirm Password*:</td>
+					<td align="center"><input type="password" name="cpsswd" value="" id="cpsswd"
+						placeholder="Re-enter your password" /></td>
+				</tr>
+				<tr>
+					<td>Date of Birth*:</td>
+					<td align="center"><input type="date" name="dob" value="" id="dob"
+						placeholder="Date of Birth" /></td>
+				</tr>
+				<tr>
+					<td>Email*:</td>
+					<td align="center"><input type="email" name="email" value="" id="email"
+						placeholder="Email ID" /></td>
+				</tr>
+				<tr>
+					<td>Telephone*:</td>
+					<td align="center"><input type="text" name="tel" value="" id="tel"
+						placeholder="Phone Number" /></td>
+				</tr>
+				<tr>
+					<td>Address*:</td>
+					<td align="center"><input type="text" name="addr" value="" id="addr"
+						placeholder="Address" /></td>
+				</tr>
+				<tr>
+					<td>Zip*:</td>
+					<td align="center"><input type="text" name="zip" value="" id="zip"
+						placeholder="Zip Code" /></td>
+				</tr>
+			</table>
+			
+			
+			<p align="center"> 
+					<input type="submit" value="Submit Now" onclick="javascript:callValidate('First Validate and then submit the form')"/> 
+					<input type="reset" value="Reset Now" onclick="javascript:callReset()" /></p>						
+
+			<p>
+				<b> <mark>Note:</mark> </b> Please make sure your details are correct before
+				submitting the form and that all the fields marked with * are
+				completed !.
+			</p>
+		</form>
+	</div>
+</body>
+
+
+<script type="text/javascript">
+	function callValidate(obj) {
+		alert(obj);
+		alert("Validating the form now !  please wait !!! ");
+		
+		if (fnameValidate()){
+			if (lnameValidate()) {
+				if (unameValidate()) {
+					if (psswdValidate()) {
+						if (cpsswdValidate()) {
+							if (matchPasswords()) {
+								if (dobValidate()) {
+									if (emailValidate()) {
+										if (telValidate()) {
+											if (addrValidate()) {
+												if (zipValidate()) {
+													alert("Form Validated successfullly... submitting the form now... ");
+													return true;
+												} else {
+													alert("Zip Code Validation failed");
+													return false;
+												}
+											} else {
+												alert("Address Validation failed");
+												return false;
+											}
+										} else {
+											alert("Telephone Validation failed");
+											return false;
+										}
+									} else {
+										alert("Email Validation failed");
+										return false;
+									}
+								} else {
+									alert("DOB Validation failed");
+									return false;
+								}
+							} else {
+								alert("Match Passwords Validation failed");
+							}
+						} else {
+							alert("Re-entered password Validation failed");
+							return false;
+						}
+					} else {
+						alert("Password Validation failed");
+						return false;
+					}
+				} else {
+					alert("User Name Validation failed");
+					return false;
+				}
+			} else {
+				alert("Last Name Validation failed");
+				return false;
+			}
+		} else {
+			alert("First Name Validation failed");
+			return false;
+		}
+		alert("Validations complete !!!");
+	}
+		
+	function fnameValidate() {
+	
+		var fnameregex = /^[A-Za-z]*$/;
+		var fname1 = document.myform.fname;
+		//alert(fname1.value);
+
+		if (fname1.value == "" || fname1.value == null) {
+			fname1.focus();
+			alert("Please enter your First Name");
+			return false;
+		} else if (fname1.value.length > 15) {
+			fname1.focus();
+			alert(fname1.value.length);
+			alert("First Name cannot be greater than 15 characters");
+			return false;
+		} else if (fname1.value.length < 4) {
+			fname1.focus();
+			alert(fname1.value.length);
+			alert("First Name cannot be less than 4 characters");
+			return false;
+		} else if (!fname1.value.match(fnameregex)) {
+			fname1.focus();
+			alert("First Name has to be alphabetical only");
+			return false;
+		} else {
+			//alert("Yaahoooo");
+			return true;
+		}
+	}
+	
+	function lnameValidate() {
+	
+		var lnameregex = /^[A-Za-z]*$/;
+		var lname1 = document.myform.lname;
+		//alert(lname1.value);
+
+		if (lname1.value == "" || lname1.value == null) {
+			lname1.focus();
+			alert("Please enter your Last Name");
+			return false;
+		} else if (lname1.value.length > 15) {
+			lname1.focus();
+			alert(lname1.value.length);
+			alert("Last Name cannot be greater than 15 characters");
+			return false;
+		} else if (lname1.value.length < 4) {
+			lname1.focus();
+			alert(lname1.value.length);
+			alert("Last Name cannot be less than 4 characters");
+			return false;
+		} else if (!lname1.value.match(lnameregex)) {
+			lname1.focus();
+			alert("Last Name has to be alphabetical only");
+			return false;
+		} else {
+			//alert("Woohoooo");
+			return true;
+		}
+
+	}
+	
+	function unameValidate() {
+		
+		var unameregex = /^[a-zA-Z0-9\-\_\.]*$/;
+		var uname1 = document.myform.uname;
+		//alert(uname1.value);
+		
+		if (uname1.value == "" || uname1.value == null) {
+			uname1.focus();
+			alert("Please enter your User Name");
+			return false;
+		} else if (uname1.value.length > 15) {
+			uname1.focus();
+			alert(uname1.value.length);
+			alert("User Name cannot be greater than 15 characters");
+			return false;
+		} else if (uname1.value.length < 4) {
+			uname1.focus();
+			alert(uname1.value.length);
+			alert("User Name cannot be less than 4 characters");
+			return false;
+		} else if (!uname1.value.match(unameregex)) {
+			uname1.focus();
+			alert("User Name can only be Alphanumeric with special characters as '.'  '_'   '-' Cannot have any other values");
+			return false;
+		} else {
+			//alert("Ooohoooo");
+			return true;
+		}
+
+	}
+	
+	function psswdValidate(){
+	
+		var psswdregex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+		var psswd1 = document.myform.psswd;
+		//alert(psswd1.value);
+		
+		if (psswd1.value == "" || psswd1.value == null) {
+			psswd1.focus();
+			alert("Please enter your Password");
+			return false;
+		} else if (psswd1.value.length < 8) {
+			psswd1.focus();
+			alert(psswd1.value.length);
+			alert("Password cannot be less than 8 characters");
+			return false;
+		} else if (!psswd1.value.match(psswdregex)) {
+			psswd1.focus();
+			alert("Password must have atleast one digit, one lowercase letter and one uppercase letter");
+			return false;
+		} else {
+			//alert("Yippee");
+			return true;
+		}
+		
+	}
+	
+	function cpsswdValidate() {
+	
+		var cpsswdregex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+		var cpsswd1 = document.myform.cpsswd;
+		//alert(cpsswd1.value);
+		
+		if (cpsswd1.value == "" || cpsswd1.value == null) {
+			cpsswd1.focus();
+			alert("Please re-enter your Password");
+			return false;
+		} else if (cpsswd1.value.length < 8) {
+			cpsswd1.focus();
+			alert(cpsswd1.value.length);
+			alert("Re-entered password cannot be less than 8 characters");
+			return false;
+		} else if (!cpsswd1.value.match(cpsswdregex)) {
+			cpsswd1.focus();
+			alert("Re-entered password must have atleast one digit, one lowercase letter and one uppercase letter");
+			return false;
+		} else {
+			//alert ("Huraayyyy");
+			return true;
+		}
+		
+	}
+	
+	function matchPasswords(){
+	
+		var psswd1 = document.myform.psswd;
+		//alert(psswd1.value);
+		var cpsswd1 = document.myform.cpsswd;
+		//alert(cpsswd1.value);
+		
+		if (!(psswd1.value == cpsswd1.value)) {
+			cpsswd1.focus;
+			alert("Re-entered password doesnt match with the password");
+			return false;
+		} else {
+			//alert("yeeeyyyyy");
+			return true;
+		}
+	}
+	
+	function dobValidate() {
+	
+		var dobregex = /^(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))$/;
+		var dob1 = document.myform.dob;
+		//alert(dob1.value);
+		
+		if (dob1.value == "" || dob1.value == null) {
+			dob1.focus();
+			alert("Please enter your Date of Birth");
+			return false;
+		} else if (!dob1.value.match(dobregex)) {
+			dob1.focus();
+			alert("Date of Birth has to be numerical only");
+			return false;
+		} else {
+			//alert("rooorurooo");
+			return true;
+		}
+		
+	}
+		
+	function emailValidate(){
+	
+		var emailregex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+		var email1 = document.myform.email;
+		//alert(email1.value);
+		
+		if (email1.value == "" || email1.value == null) {
+			email1.focus();
+			alert("Please enter your Email ID");
+			return false;
+		} else if (!email1.value.match(emailregex)) {
+			email1.focus();
+			alert("Please enter a valid Email ID");
+			return false;
+		} else {
+			//alert("buzzzzzzzzz");
+			return true;
+		}
+		
+	}	
+		
+	function telValidate(){
+	
+		var telregex = /^\d{3}[\-]\d{3}[\-]\d{4}$/;
+		var tel1 = document.myform.tel;
+		//alert(tel1.value);
+		
+		if (tel1.value == "" || tel1.value == null) {
+			tel1.focus();
+			alert("Please enter your Telephone number");
+			return false;
+		} else if (tel1.value.length < 12) {
+			tel1.focus();
+			alert(tel1.value.length);
+			alert("Telephone number cannot be less than 12 characters");
+			return false;
+		} else if (!tel1.value.match(telregex)) {
+			tel1.focus();
+			alert("Telephone number has to be numerical in XXX-XXX-XXXX format only");
+			return false;
+		} else {
+			//alert("triing triiiing");
+			return true;
+		}
+		
+	}	
+	
+	function addrValidate() {
+	
+		var addrregex = /^[0-9a-zA-Z\ \.\-\\\,]+$/;
+		var addr1 = document.myform.addr;
+		//alert(addr1.value);
+		
+		if (addr1.value == "" || addr1.value == null) {
+			addr1.focus();
+			alert("Please enter your Address");
+			return false;
+		} else if (!addr1.value.match(addrregex)) {
+			addr1.focus();
+			alert("Address has to be Alphanumeric only. No Special characters are allowed");
+			return false;
+		} else {
+			//alert("taaataaa");
+			return true;
+		}
+		
+	}
+	
+	function zipValidate() {
+	
+		var zipregex = /^[0-9]+$/;
+		var zip1 = document.myform.zip;
+		//alert(zip1.value);
+		
+		if (zip1.value == "" || zip1.value == null) {
+			zip1.focus();
+			alert("Please enter your Zip Code");
+			return false;
+		} else if (zip1.value.length != 5) {
+			zip1.focus();
+			alert(zip1.value.length);
+			alert("Zip Code has to be 5 characters in length");
+			return false;
+		} else if (!zip1.value.match(zipregex)) {
+			zip1.focus();
+			alert("Zip Code has to be numerical only");
+			return false;
+		} else {
+			//alert("Doodooodoooo");
+			return true;
+		}
+		
+
+	}
+	
+	function callReset() {
+		alert("Resetting the values now. Please wait !!!");
+	}
+	
+</script>
+
+</html>
