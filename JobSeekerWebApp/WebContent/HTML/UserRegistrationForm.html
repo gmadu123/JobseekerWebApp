@@ -103,7 +103,7 @@ p {
 			
 			
 			<p align="center"> 
-					<input type="submit" value="Submit Now" /> 
+					<input type="submit" value="Submit Now" onclick="javascript:callValidate('Validating the form now')"/> 
 					<input type="reset" value="Reset Now" onclick="javascript:callReset()" /></p>						
 
 			<p>
@@ -118,8 +118,8 @@ p {
 
 <script type="text/javascript">
 	function callValidate(obj) {
-		alert(obj);
-		alert("Validating the form now !  please wait !!! ");
+		//alert(obj);
+		//alert("Validating the form now !  please wait !!! ");
 		
 		if (fnameValidate()){
 			if (lnameValidate()) {
@@ -132,7 +132,7 @@ p {
 										if (telValidate()) {
 											if (addrValidate()) {
 												if (zipValidate()) {
-													alert("Form Validated successfullly... submitting the form now... ");
+													//alert("Form Validated successfullly... submitting the form now... ");
 													return true;
 												} else {
 													alert("Zip Code Validation failed");

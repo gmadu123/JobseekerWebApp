@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
+<%@ page import="com.g2force.jobseeker.web.models.*" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,6 +50,10 @@
 </head>
 
 <body>
+<% 
+UserDTO user = (UserDTO)request.getAttribute("userInfo"); 
+%>
+
 <p>Thank you for registering. Your details have been saved as below:</p>
 	<table align="center">
 		<tr>
@@ -54,36 +61,36 @@
 		    <th>Values</th>
 		</tr>
 		<tr>
-			<td><label>First Name</label></td>
-			<td><%= request.getParameter("fname") %></td>
-		</tr>
-		<tr>
-			<td><label>Last Name</label></td>
-			<td><%= request.getParameter("lname") %></td>
+			<td><label>User Name</label></td>
+			<td><%= user.getFirstName() %></td>
 		</tr>
 		<tr>
 			<td><label>User Name</label></td>
-			<td><%= request.getParameter("uname") %></td>
+			<td><%= user.getLastName() %></td>
+		</tr>
+		<tr>
+			<td><label>User Name</label></td>
+			<td><%= user.getUserName() %></td>
 		</tr>
 		<tr>
 			<td><label>Date of Birth</label></td>
-			<td><%= request.getParameter("dob") %></td>
+			<td><%= user.getDateOfBirth() %></td>
 		</tr>
 		<tr>
 			<td><label>Email</label></td>
-			<td><%= request.getParameter("email") %></td>
+			<td><%= user.getEmail() %></td>
 		</tr>
 		<tr>
 			<td><label>Telephone</label></td>
-			<td><%= request.getParameter("tel") %></td>
+			<td><%= user.getTelephone() %></td>
 		</tr>
 		<tr>
 			<td><label>Address</label></td>
-			<td><%= request.getParameter("addr") %></td>
+			<td><%= user.getAddress() %></td>
 		</tr>
 		<tr>
 			<td><label>ZipCode</label></td>
-			<td><%= request.getParameter("zip") %></td>
+			<td><%= user.getZip() %></td>
 		</tr>
 	</table>
 
